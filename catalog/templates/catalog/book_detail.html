@@ -1,0 +1,109 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %} Book - {{book.title}} {% endblock %}
+
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'catalog/css/book_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container book-details-container">
+    <table class="book-details">
+        <thead>
+            <td class="book-props">Book</td>
+            <td class="book-info book-title">
+                <h1>{{ book.title }}</h1> 
+            </td>
+        </thead>
+
+        <tr>
+            <td class="book-props">Author </td>
+            <td class="book-info book-author">
+                <h4>
+                    <a href="#">{{ book.author }}</a>
+                </h4>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="book-props">Summary </td>
+            <td class="book-info book-info-summary">
+                <p>{{ book.summary }}</p> 
+            </td>
+        </tr>
+
+        <tr>
+            <td class="book-props">ISBN </td>
+            <td class="book-info book-info-isbn">
+                <p>{{ book.isbn }}</p> 
+            </td>
+        </tr>
+
+        <tr>
+            <td class="book-props">Language </td>
+            <td class="book-info book-info-language">
+                <p>{{ book.language }}</p> 
+            </td>
+        </tr>
+
+        <tr>
+            <td class="book-props">Genre </td>
+            <td>
+                <table class="book-info-genres">
+                    {% for genre in book.genre.all %}
+                    <tr class="book-genre-row">
+                        <td class="book-genre">{{ genre }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="container book-copies-container">
+    <table class="book-copies">
+        <thead>
+            <td class="book-copies-title" colspan="5"><h5>Book Copies</h5></td>
+        </thead>
+        <thead>
+            <td class="book-copies-head">S.No.</td>
+            <td class="book-copies-head">Imprint</td>
+            <td class="book-copies-head">Status</td>
+            <td class="book-copies-head">Due Dack <br> (If on loan)</td>
+            <td class="book-copies-head">Id</td>
+        </thead>
+        {% for copy in book.bookinstance_set.all %}
+        <tr class="book-copy-row">
+            <td class="book-copy-sno">{{ forloop.counter }}</td>
+            <td class="book-copy-imprint">{{ copy.imprint }}</td>
+            <td class="book-copy-status">
+                <p class="{% if copy.status == 'a' %} 
+                            text-success 
+                        {% elif copy.status == 'r' %} 
+                            text-light bg-dark
+                        {% elif copy.status == 'm' %}
+                            text-light bg-dark
+                        {% elif copy.status == 'o' and copy.is_overdue %}
+                            text-danger
+                        {% else %}
+                            text-info
+                        {% endif %}">
+                    {{ copy.get_status_display }}
+                </p>
+            </td>
+            <td class="book-copy-duedate">
+                {% if copy.status == 'o' %} 
+                    {{ copy.due_back }} 
+                {% else %} 
+                    -
+                {% endif %}
+            </td>
+            <td class="book-copy-id">{{ copy.id }}</td> 
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

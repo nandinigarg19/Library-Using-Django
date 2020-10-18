@@ -1,0 +1,102 @@
+<!-- Update filter to add advanced filtering
+Plan for django api and react
+Filtering for author also -->
+
+
+{% extends 'catalog/base.html' %}
+
+{% block title %} Search for a book {% endblock %}
+
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'catalog/css/book_filter.css' %}">
+{% endblock %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="book-search">
+    <div class="book-search-title">
+      <h4>Search a Book</h4>
+    </div>
+    <div class="book-search-content">
+        <form method="GET">
+            <div class="book-info-search">
+                <div class="card form-group">
+                    <h6>Book Title</h6>
+                    {% render_field book_filter.form.title class="form-control book-title" placeholder="Enter Book Title" %}
+                </div>
+                <div class="card form-group">
+                    <h6>Book Author</h6>
+                    {% render_field book_filter.form.author class="form-control author-list" %}
+                    <script>
+                        document.querySelector('div.form-group select.author-list option:nth-of-type(1)').innerText = 'Select an Author'
+                    </script>
+                </div>
+                <div class="card form-group">
+                    <h6>Genre</h6>
+                    {% render_field book_filter.form.genre class="form-control genre-list" %}
+                    <script>
+                        document.querySelector('select#id_genre').innerHTML = '<option value="">None</option>' + document.querySelector('select#id_genre').innerHTML
+                    </script>
+                </div>
+                <div class="card form-group">
+                    <h6>Language</h6>
+                    {% render_field book_filter.form.language class="form-control language-list" %}
+                    <script>
+                        document.querySelector('div.form-group select.language-list option:nth-of-type(1)').innerText = 'Select a Language'
+                    </script>
+                </div>
+            </div>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button></a>
+        </form>
+    </div>
+</div>
+ 
+<!-- Search Results -->
+{% if book_filter.qs %}
+    <div class="search-results">
+        <div class="card-header all-books-title">
+            Search Results
+        </div>
+        <div class="card-body all-books-content">
+            <table class="all-books">
+                <thead>
+                    <td class="books-head">Book</td>
+                    <td class="books-head">Author</td>
+                    <td class="books-head">Genre</td>
+                    <td class="books-head">Language</td>    
+                </thead>
+                {% for book in book_filter.qs %}
+                <tr class="books-row">
+                    <td class="book-title">
+                        <div class="book-title" id="{{ book.pk }}">
+                            <a href="{{ book.get_absolute_url }}">{{ book.title }}</a>
+                        </div>
+                    </td>
+                    <td class="book-author">
+                        <div class="book-author" id="{{book.author.pk}}">
+                            <a href="{{ book.author.get_absolute_url }}">{{ book.author }}</a>
+                        </div>
+                    </td>
+                    <td class="book-genre">
+                        <div class="book-genre">
+                            {{ book.genre.all|join:", " }}
+                        </div>
+                    </td>
+                    <td class="book-language">
+                        <div class="book-language">
+                            {{ book.language }}
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% else %}
+    <h6>There are no books found in the Library according to the search criterion.</h6>
+{% endif %}
+
+{% endblock %}

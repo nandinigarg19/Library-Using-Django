@@ -1,0 +1,44 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %} All Books {% endblock %}
+
+{% load static %}
+{% block css %} 
+<link rel="stylesheet" href="{% static 'catalog/css/book_list.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    {% if book_list %}
+        <div class="card all-books-main">
+            <div class="card-header all-books-title">
+                All Books
+            </div>
+            <div class="card-body all-books-content">
+                <table class="all-books">
+                    <thead>
+                        <td class="books-head">Book</td>
+                        <td class="books-head">Author</td>
+                    </thead>
+                    {% for book in book_list %}
+                    <tr class="books-row">
+                        <td class="book-title">
+                            <div class="book-title" id="{{ book.pk }}">
+                                <a href="{{ book.get_absolute_url }}">{{ book.title }}</a>
+                            </div>
+                        </td>
+                        <td class="book-author">
+                            <div class="book-author" id="{{book.author.pk}}">
+                                <a href="{{ book.author.get_absolute_url }}">{{ book.author }}</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    {% else %}
+        <h6>There are no books in Library</h6>
+    {% endif %}
+
+{% endblock %}

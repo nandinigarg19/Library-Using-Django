@@ -1,0 +1,33 @@
+.all-authors-main
+{
+    margin-top: 20px;
+    display: inline-block;
+    padding: 20px;
+}
+
+.all-authors-title
+{
+    font-weight: bolder;
+    text-align: center;
+    min-width: 200px;
+}
+
+.all-authors
+{
+    border: 2px solid black;
+}
+
+thead
+{
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
+
+td
+{
+    text-align: center;
+    min-width: 200px;
+    width: max-content;
+    border: 2px solid black;
+}

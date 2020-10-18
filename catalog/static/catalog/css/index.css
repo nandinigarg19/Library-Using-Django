@@ -1,0 +1,21 @@
+.home-title
+{
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.home-info
+{
+    margin-top: 50px;
+}
+
+.home-info-title, .home-info-content
+{
+    margin: 20px;
+}
+
+div.home-info-content li
+{
+    margin: 10px;
+}
+

@@ -1,0 +1,69 @@
+.author-search
+{
+    margin-top: 20px;
+}
+
+.author-search-title, .author-search-content
+{
+    margin: 20px 0px 20px 0px;
+}
+
+div.author-info-search
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px 0px 0px 0px;
+}
+
+div.form-group
+{
+    padding: 20px;
+}
+
+.all-authors-main
+{
+    margin-top: 20px;
+    display: inline-block;
+    padding: 20px;
+}
+
+.all-authors-title
+{
+    font-weight: bolder;
+    text-align: center;
+    min-width: 200px;
+}
+
+.all-authors
+{
+    border: 2px solid black;
+}
+
+table.all-authors thead
+{
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
+
+table.all-authors td
+{
+    text-align: center;
+    min-width: 200px;
+    width: max-content;
+    border: 2px solid black;
+
+}
+
+div.search-results
+{
+    display: inline-block;
+}
+
+div.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 20px 0px 20px 0px;
+    display: inline-block;
+}

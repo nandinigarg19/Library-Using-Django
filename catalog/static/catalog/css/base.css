@@ -1,0 +1,44 @@
+html,body,div.container-fluid,div.row
+{
+    height: 100%;
+}
+
+.side-nav-bar
+{
+    background-color: aqua;
+    border: 2px solid black;
+    min-height: 100%;
+}
+
+.side-bar-title
+{
+    margin-top: 20px;
+    box-shadow: black;
+}
+
+.side-bar-content
+{
+    margin-top: 20px;
+}
+
+div.main-content
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: inline-block;
+    text-align: center;
+}
+
+div.paginated-area
+{
+    padding-top: 20px;
+    text-align: center;
+}
+
+div
+{
+    display: inline-block;
+    width: inherit;
+    text-align: center;
+}
+

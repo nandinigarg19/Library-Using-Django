@@ -1,0 +1,30 @@
+{% extends 'catalog/base.html' %}
+
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'catalog/css/index.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="home-title">
+  <h1>Our Library</h1>
+</div>
+
+<p>Welcome to our Library, a website developed by <em>Lokesh Aggarwal</em>!</p>
+
+<div class="home-info">
+  <div class="home-info-title">
+    <h4>Basic Information</h4>
+  </div>
+  <div class="home-info-content">
+    <ul>
+      <li><strong>Books:</strong> {{ num_books }}</li>
+      <li><strong>Copies:</strong> {{ num_instances }}</li>
+      <li><strong>Copies available:</strong> {{ num_instances_available }}</li>
+      <li><strong>Authors:</strong> {{ num_authors }}</li>
+    </ul>
+  </div>
+</div>
+{% endblock %}

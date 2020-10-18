@@ -1,0 +1,47 @@
+table.author-details, table.author-books, div.author-details-container
+{
+    margin: 50px 0px 50px 0px;
+}
+
+table.author-details, table.author-books, td
+{
+    text-align: center;
+    border: 2px solid black;
+}
+
+/* lhs of author detail table */
+td.author-props, td.author-books-head        
+{
+    border: 1px solid white;
+    background-color: black;
+    color: white; 
+}
+
+/* rhs of author detail table */
+td.author-info
+{
+    min-width: 600px;
+    width: max-content;
+}
+
+td.author-props
+{
+    width: max-content;
+    min-width: 150px;
+}
+
+td.author-books-head
+{
+    width: 150px;
+}
+
+td.author-books-title
+{
+    height: 50px;
+    background-color: black;
+    color: whitesmoke;
+    border-bottom: 1px solid white;
+}
+
+
+

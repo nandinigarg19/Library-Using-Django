@@ -1,0 +1,40 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %} All Authors {% endblock %}
+
+{% load static %}
+{% block css %} 
+<link rel="stylesheet" href="{% static 'catalog/css/author_list.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    {% if author_list %}
+        <div class="card all-authors-main">
+            <div class="card-header all-authors-title">
+                All Authors
+            </div>
+            <div class="card-body all-authors-content">
+                <table class="all-authors">
+                    <thead>
+                        <td class="authors-head">Author Name</td>
+                        <td class="authors-head">Author DOB</td>
+                    </thead>
+                    {% for author in author_list %}
+                    <tr class="authors-row">
+                        <td class="authors-info" id="{{author.pk}}">
+                            <a href="{{ author.get_absolute_url }}">{{ author.first_name }}&nbsp;{{ author.last_name }}</a>
+                        </td>
+                        <td class="authors-info">
+                            {{author.date_of_birth}}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    {% else %}
+        <h6>There is no authors information</h6>
+    {% endif %}
+
+{% endblock %}

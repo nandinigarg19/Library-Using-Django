@@ -1,0 +1,66 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %} Book - {{ author.first_name }} &nbsp; {{ author.last_name }} {% endblock %}
+
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'catalog/css/author_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container author-details-container">
+    <table class="author-details">
+        <thead>
+            <td class="author-props">Author</td>
+            <td class="author-info author-name">
+                <h1>{{ author.first_name }} &nbsp; {{author.last_name}}</h1> 
+            </td>
+        </thead>
+
+        <tr>
+            <td class="author-props">Date of birth</td>
+            <td class="author-info">
+                <p>{{ author.date_of_birth }}</p> 
+            </td>
+        </tr>
+
+        {% if author.date_of_death %}
+        <tr>
+            <td class="author-props">Died </td>
+            <td class="author-info">
+                <p>{{ author.date_of_death }}</p> 
+            </td>
+        </tr>
+        {% endif %}
+    </table>
+</div>
+
+<div class="container author-books-container">
+    <table class="author-books">
+        <thead>
+            <td class="author-books-title" colspan="5">
+                <h5> 
+                    Books by {{ author.first_name }}&nbsp;{{ author.last_name }} 
+                </h5>
+            </td>
+        </thead>
+        <thead>
+            <td class="author-books-head">S.No.</td>
+            <td class="author-books-head">Title</td>
+            <td class="author-books-head">Language</td>
+            <td class="author-books-head">Genre</td>
+            <td class="author-books-head">Number of <br> Available <br> copies</td>
+        </thead>
+        {% for book in author.book_set.all %}
+        <tr class="author-book-row">
+            <td class="author-book-sno">{{ forloop.counter }}</td>
+            <td class="author-book-title"><a href="{% url 'book-detail' book.pk %}"> {{ book.title  }}</a></td>
+            <td class="author-book-language">{{ book.language }}</td>
+            <td class="author-book-genre">{{ book.genre.all|join:", " }}</td>
+            <td class="author-book-available-copies">{{ book.get_available_copies|length}}</td> 
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

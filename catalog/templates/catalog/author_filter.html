@@ -1,0 +1,97 @@
+
+{% extends 'catalog/base.html' %}
+
+{% block title %} Search for a Author {% endblock %}
+
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'catalog/css/author_filter.css' %}">
+{% endblock %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="author-search">
+    <div class="author-search-title">
+      <h4>Search for an Author</h4>
+    </div>
+    <div class="author-search-content">
+        <form method="GET">
+            <div class="author-info-search">
+                <div class="card form-group">
+                    <h6>Author Name</h6>
+                    {% render_field author_filter.form.first_name class="form-control" id="author_first_name" placeholder="First Name" %}
+                    {% render_field author_filter.form.last_name class="form-control" id="author_last_name" placeholder="Last Name" %}
+                </div>
+                <div class="card form-group">
+                    <h6>Author's Book Title</h6>
+                    {% render_field author_filter.form.book_title class="form-control" id="author_book_title" placeholder="Enter Book Title"%}
+                </div>
+                <div class="card form-group">
+                    <h6>Author's Books Genre</h6>
+                    {% render_field book_filter.form.book_genre class="form-control" id="author_book_genre" %}
+                    <script>
+                        //document.querySelector('select#id_genre').innerHTML = '<option value="">None</option>' + document.querySelector('select#id_genre').innerHTML
+                    </script>
+                </div>
+                <div class="card form-group">
+                    <h6>Author's Books Language</h6>
+                    {% render_field book_filter.form.book_language class="form-control" id="author_book_language" %}
+                    <script>
+                        //document.querySelector('div.form-group select.language-list option:nth-of-type(1)').innerText = 'Select a Language'
+                    </script>
+                </div>
+            </div>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button></a>
+        </form>
+    </div>
+</div>
+ 
+<!-- Search Results -->
+{% if author_filter.qs %}
+    <div class="search-results">
+        <div class="card-header all-authors-title">
+            Search Results
+        </div>
+        <div class="card-body all-authors-content">
+            <table class="all-authors">
+                <thead>
+                    <td class="authors-head">Name</td>
+                    <td class="authors-head">Date of Birth</td>
+                    <td class="authors-head">Books</td>
+                    <td class="authors-head">Genre</td>
+                    <td class="authors-head">Language</td>    
+                </thead>
+                {% for author in author_filter.qs %}
+                <tr class="authors-row">
+                    <td class="author-name">
+                        <div class="author-name" id="{{ author.pk }}">
+                            <a href="{{ author.get_absolute_url }}">{{ author.first_name }}&nbsp;{{author.last_name}}</a>
+                        </div>
+                    </td>
+                    <td class="author-dob">
+                        <div class="author-dob" id="author-dob">
+                            {{ author.date_of_birth }}
+                        </div>
+                    </td>
+                    <!-- <td class="book-genre">
+                        <div class="book-genre">
+                            {{ book.genre.all|join:", " }}
+                        </div>
+                    </td>
+                    <td class="book-language">
+                        <div class="book-language">
+                            {{ book.language }}
+                        </div>
+                    </td> -->
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% else %}
+    <h6>There are no authors found in the Library according to the search criterion.</h6>
+{% endif %}
+
+{% endblock %}

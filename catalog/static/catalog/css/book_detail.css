@@ -1,0 +1,58 @@
+table.book-details, table.book-copies, div.book-details-container
+{
+    margin: 50px 0px 50px 0px;
+}
+
+table.book-details, table.book-copies, td
+{
+    text-align: center;
+    border: 2px solid black;
+}
+
+table.book-info-genres
+{
+    min-width: 600px;
+    width: max-content;
+}
+
+/* lhs of book detail table */
+td.book-props, td.book-copies-head        
+{
+    border: 1px solid white;
+    background-color: black;
+    color: white; 
+}
+
+/* rhs of book detail table */
+td.book-info
+{
+    min-width: 600px;
+    width: max-content;
+}
+
+td.book-props
+{
+    width: max-content;
+    min-width: 150px;
+}
+
+td.book-copies-head
+{
+    width: 150px;
+}
+
+td.book-copies-title
+{
+    height: 50px;
+    background-color: black;
+    color: whitesmoke;
+    border-bottom: 1px solid white;
+}
+
+td.book-copy-status
+{
+    padding-top: 9px;
+}
+
+
+
